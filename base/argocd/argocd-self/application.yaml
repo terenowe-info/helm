@@ -17,4 +17,4 @@ spec:
   sources:
     - repoURL: https://github.com/terenowe-info/helm.git
       targetRevision: main
-      path: overlays/seemscloud
+      path: overlays
