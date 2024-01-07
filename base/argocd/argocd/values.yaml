@@ -1,0 +1,109 @@
+fullnameOverride: argocd
+
+configs:
+  repositories:
+    terenowe-app-argocd-self:
+      url: https://github.com/terenowe-info/helm.git
+      name: "[Terenowe][App] Argo Self Components"
+      type: git
+      insecure: "true"
+    ext-helm-argoproj:
+      url: https://argoproj.github.io/argo-helm
+      name: "[Ext][Helm] ArgoProj"
+      type: helm
+      insecure: "true"
+    ext-helm-redpanda:
+      url: https://charts.redpanda.com
+      name: "[Ext][Helm] Redpanda"
+      type: helm
+      insecure: "true"
+    ext-helm-jetstack:
+      url: https://charts.jetstack.io
+      name: "[Ext][Helm] JetStack"
+      type: helm
+      insecure: "true"
+
+  cm:
+    kustomize.enabled: true
+    jsonnet.enabled: true
+    helm.enabled: true
+
+    ui.bannercontent: |
+      Hello there!<hr>
+      sadf<br />
+      safd<br />
+    ui.bannerurl: "https://argoproj.github.io"
+    ui.bannerpermanent: "true"
+    ui.bannerposition: "top"
+
+    timeout.reconciliation: 1m
+
+    resource.ignoreResourceUpdatesEnabled: "true"
+    #resource.customizations.ignoreResourceUpdates.all: |
+    #  jsonPointers:
+    #    - /metadata/resourceVersion
+
+    #resource.customizations.ignoreResourceUpdates.argoproj.io_Application: |
+    #  jsonPointers:
+    #    - /status
+
+  params:
+    server.disable.auth: true
+    server.insecure: true
+    server.log.format: "json"
+    server.log.level: "info"
+    server.oidc.cache.expiration: "1m"
+    server.default.cache.expiration: "1m"
+    server.login.attempts.expiration: "1m"
+    server.app.state.cache.expiration: "1m"
+    server.connection.status.cache.expiration: "1m"
+
+    reposerver.parallelism.limit: 0
+    reposerver.log.format: "json"
+    reposerver.log.level: "info"
+    reposerver.repo.cache.expiration: "1m"
+    reposerver.default.cache.expiration: "1m"
+    reposerver.enable.git.submodule: "false"
+
+    controller.sharding.algorithm: "round-robin"
+    controller.resource.health.persist: "false"
+    controller.log.format: "json"
+    controller.log.level: "info"
+    controller.metrics.cache.expiration: "1m"
+    controller.app.state.cache.expiration: "1m"
+    controller.default.cache.expiration: "1m"
+
+    applicationsetcontroller.log.format: "json"
+    applicationsetcontroller.log.level: "info"
+    applicationsetcontroller.enable.git.submodule: "false"
+
+    notificationscontroller.log.format: "json"
+    notificationscontroller.log.level: "info"
+
+server:
+  replicas: 1
+
+  service:
+    type: LoadBalancer
+    servicePortHttp: 8080
+    servicePortHttps: 8443
+
+repoServer:
+  replicas: 1
+
+applicationSet:
+  replicas: 1
+
+controller:
+  replicas: 1
+
+redis:
+  enabled: false
+
+redis-ha:
+  enabled: true
+
+  replicas: 1
+
+  haproxy:
+    replicas: 1
