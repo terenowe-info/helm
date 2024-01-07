@@ -4,7 +4,7 @@ projects:
     finalizers:
       - resources-finalizer.argocd.argoproj.io
     sourceRepos:
-      - 'https://github.com/seemscloud/helm-argocd-self.git'
+      - 'https://github.com/terenowe-info/helm.git'
       - 'https://argoproj.github.io/argo-helm'
       - 'https://charts.bitnami.com/bitnami'
     destinations:
@@ -22,7 +22,7 @@ projects:
     sourceRepos:
       - 'https://prometheus-community.github.io/helm-charts'
       - 'https://grafana.github.io/helm-charts'
-      - 'https://github.com/seemscloud/helm-argocd-self.git'
+      - 'https://github.com/terenowe-info/helm.git'
       - 'https://charts.bitnami.com/bitnami'
       - 'https://charts.min.io'
     destinations:
@@ -41,7 +41,7 @@ projects:
       - resources-finalizer.argocd.argoproj.io
     sourceRepos:
       - 'https://helm.releases.hashicorp.com'
-      - 'https://github.com/seemscloud/helm-argocd-self.git'
+      - 'https://github.com/terenowe-info/helm.git'
     destinations:
       - namespace: vault-system
         name: "in-cluster"
@@ -55,7 +55,7 @@ projects:
       - resources-finalizer.argocd.argoproj.io
     sourceRepos:
       - 'https://charts.redpanda.com/'
-      - 'https://github.com/seemscloud/helm-argocd-self.git'
+      - 'https://github.com/terenowe-info/helm.git'
       - 'https://charts.bitnami.com/bitnami'
     destinations:
       - namespace: queues-system
@@ -70,7 +70,7 @@ projects:
       - resources-finalizer.argocd.argoproj.io
     sourceRepos:
       - 'https://charts.jetstack.io'
-      - 'https://github.com/seemscloud/helm-argocd-self.git'
+      - 'https://github.com/terenowe-info/helm.git'
     destinations:
       - namespace: cert-manager-system
         name: "in-cluster"
@@ -85,7 +85,7 @@ projects:
     sourceRepos:
       - 'https://jaegertracing.github.io/helm-charts'
       - 'https://helm.elastic.co'
-      - 'https://github.com/seemscloud/helm-argocd-self.git'
+      - 'https://github.com/terenowe-info/helm.git'
       - 'https://kiali.org/helm-charts '
     destinations:
       - namespace: istio-tracing-system
@@ -103,7 +103,7 @@ projects:
       - resources-finalizer.argocd.argoproj.io
     sourceRepos:
       - 'https://metallb.github.io/metallb'
-      - 'https://github.com/seemscloud/helm-argocd-self.git'
+      - 'https://github.com/terenowe-info/helm.git'
     destinations:
       - namespace: metallb-system
         name: "in-cluster"
@@ -116,7 +116,7 @@ projects:
     finalizers:
       - resources-finalizer.argocd.argoproj.io
     sourceRepos:
-      - 'https://github.com/seemscloud/helm-argocd-self.git'
+      - 'https://github.com/terenowe-info/helm.git'
       - 'https://charts.min.io'
       - 'https://argoproj.github.io/argo-helm'
     destinations:
@@ -131,7 +131,7 @@ projects:
     finalizers:
       - resources-finalizer.argocd.argoproj.io
     sourceRepos:
-      - 'https://github.com/seemscloud/helm-argocd-self.git'
+      - 'https://github.com/terenowe-info/helm.git'
       - 'https://kedacore.github.io/charts'
     destinations:
       - namespace: "keda-system"
@@ -148,7 +148,7 @@ projects:
     finalizers:
       - resources-finalizer.argocd.argoproj.io
     sourceRepos:
-      - 'https://github.com/seemscloud/helm-argocd-self.git'
+      - 'https://github.com/terenowe-info/helm.git'
       - 'https://istio-release.storage.googleapis.com/charts'
     destinations:
       - namespace: "*"
@@ -162,7 +162,7 @@ projects:
     finalizers:
       - resources-finalizer.argocd.argoproj.io
     sourceRepos:
-      - 'https://github.com/seemscloud/helm-argocd-self.git'
+      - 'https://github.com/terenowe-info/helm.git'
       - 'https://charts.crossplane.io/stable'
     destinations:
       - namespace: "crossplane-system"
@@ -176,7 +176,7 @@ projects:
     finalizers:
       - resources-finalizer.argocd.argoproj.io
     sourceRepos:
-      - 'https://github.com/seemscloud/helm-argocd-self.git'
+      - 'https://github.com/terenowe-info/helm.git'
       - 'https://kyverno.github.io/kyverno/'
     destinations:
       - namespace: "kyverno-system"
@@ -190,7 +190,7 @@ projects:
     finalizers:
       - resources-finalizer.argocd.argoproj.io
     sourceRepos:
-      - 'https://github.com/seemscloud/helm-argocd-self.git'
+      - 'https://github.com/terenowe-info/helm.git'
       - 'https://fluent.github.io/helm-charts'
       - 'https://helm.elastic.co'
       - 'https://charts.redpanda.com'
