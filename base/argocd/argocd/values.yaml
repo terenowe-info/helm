@@ -87,10 +87,10 @@ server:
     type: LoadBalancer
     annotations:
       networking.gke.io/load-balancer-type: "Internal"
-      # networking.gke.io/internal-load-balancer-subnet: "test"
+      networking.gke.io/internal-load-balancer-subnet: "gke-sigma-prod-aaa-lb"
     servicePortHttp: 8080
     servicePortHttps: 8443
-    loadBalancerIP: ""
+    loadBalancerIP: "10.150.150.10"
 
 repoServer:
   replicas: 2
