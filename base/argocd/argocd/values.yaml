@@ -89,7 +89,7 @@ server:
     servicePortHttps: 8443
 
 repoServer:
-  replicas: 1
+  replicas: 2
 
 applicationSet:
   replicas: 1
