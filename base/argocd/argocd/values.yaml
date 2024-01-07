@@ -98,10 +98,10 @@ controller:
   replicas: 1
 
 redis:
-  enabled: false
+  enabled: true
 
 redis-ha:
-  enabled: true
+  enabled: false
 
   replicas: 1
 
