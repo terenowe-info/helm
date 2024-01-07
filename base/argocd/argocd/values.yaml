@@ -84,7 +84,9 @@ server:
   replicas: 1
 
   service:
-    type: ClusterIP
+    type: LoadBalancer
+    annotations:
+      networking.gke.io/load-balancer-type: "Internal"
     servicePortHttp: 8080
     servicePortHttps: 8443
 
