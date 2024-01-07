@@ -4,7 +4,7 @@ projects:
     finalizers:
       - resources-finalizer.argocd.argoproj.io
     sourceRepos:
-      - 'https://github.com/seemscloud/helm-argocd-self.git'
+      - 'https://github.com/terenowe-info/helm.git'
       - 'https://argoproj.github.io/argo-helm'
       - 'https://charts.bitnami.com/bitnami'
     destinations:
@@ -20,7 +20,7 @@ projects:
       - resources-finalizer.argocd.argoproj.io
     sourceRepos:
       - 'https://charts.redpanda.com/'
-      - 'https://github.com/seemscloud/helm-argocd-self.git'
+      - 'https://github.com/terenowe-info/helm.git'
       - 'https://charts.bitnami.com/bitnami'
     destinations:
       - namespace: queues-system
@@ -35,7 +35,7 @@ projects:
       - resources-finalizer.argocd.argoproj.io
     sourceRepos:
       - 'https://charts.jetstack.io'
-      - 'https://github.com/seemscloud/helm-argocd-self.git'
+      - 'https://github.com/terenowe-info/helm.git'
     destinations:
       - namespace: cert-manager-system
         name: "in-cluster"
