@@ -93,6 +93,7 @@ server:
     ingressClassName: nginx
     annotations:
       cert-manager.io/cluster-issuer: cert-manager-letsencrypt-prod
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
     hosts:
       - argocd.local.sigma.prod.terenowe.l3t.io
     tls:
