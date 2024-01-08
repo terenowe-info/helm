@@ -7,10 +7,17 @@ resources:
       labels: { }
       annotations: { }
     resources:
-      - apiVersion: v1
-        kind: ConfigMap
+      - apiVersion: cert-manager.io/v1
+        kind: Issuer
         metadata:
-          name: config
-        data:
-          config.yaml: |
-            name: dupa
+          name: letsencrypt-prod
+        spec:
+          acme:
+            server: https://acme-v02.api.letsencrypt.org/directory
+            email: certificates@terenowe.info
+            privateKeySecretRef:
+              name: letsencrypt-prod
+            solvers:
+              - http01:
+                  ingress:
+                    ingressClassName: nginx
