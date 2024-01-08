@@ -36,6 +36,7 @@ projects:
     sourceRepos:
       - 'https://charts.jetstack.io'
       - 'https://github.com/terenowe-info/helm.git'
+      - 'https://github.com/seemscloud/helm-charts.git'
     destinations:
       - namespace: cert-manager-system
         name: "in-cluster"
