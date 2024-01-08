@@ -1,0 +1,16 @@
+nameOverride: ""
+fullnameOverride: ""
+
+resources:
+  - metadata:
+      namespace: ""
+      labels: { }
+      annotations: { }
+    resources:
+      - apiVersion: v1
+        kind: ConfigMap
+        metadata:
+          name: config
+        data:
+          config.yaml: |
+            name: dupa
