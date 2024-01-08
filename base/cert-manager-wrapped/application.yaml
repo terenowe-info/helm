@@ -13,7 +13,7 @@ spec:
       repoURL: https://github.com/terenowe-info/helm.git
       targetRevision: main
     - helm:
-        releaseName: argocd
+        releaseName: cert-manager
         valueFiles:
           - $argocd-self/base/cert-manager-wrapped/values.yaml
       repoURL: https://github.com/seemscloud/helm-charts.git
