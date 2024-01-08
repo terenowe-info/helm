@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager-wrapped
+  namespace: argocd-system
+spec:
+  destination:
+    namespace: cert-manager-system
+    server: https://kubernetes.default.svc
+  project: cert-manager-system
+  sources:
+    - ref: argocd-self
+      repoURL: https://github.com/terenowe-info/helm.git
+      targetRevision: main
+    - helm:
+        releaseName: argocd
+        valueFiles:
+          - $argocd-self/base/cert-manager-wrapped/values.yaml
+      repoURL: https://github.com/seemscloud/helm-charts.git
+      path: charts/wrapper
+      targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
