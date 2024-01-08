@@ -27,6 +27,8 @@ resources:
         spec:
           secretName: argocd-local-tls
           commonName: argocd.local.sigma.prod.terenowe.l3t.io
+          dnsNames:
+            - argocd.local.sigma.prod.terenowe.l3t.io
           issuerRef:
             name: cert-manager-letsencrypt-prod
             kind: ClusterIssuer
