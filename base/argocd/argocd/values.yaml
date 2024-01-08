@@ -4,22 +4,27 @@ configs:
   repositories:
     terenowe-app-argocd-self:
       url: https://github.com/terenowe-info/helm.git
-      name: "[Terenowe][App] Argo Self Components"
+      name: "[Terenowe][App] Argo Self"
       type: git
       insecure: "true"
-    ext-helm-argoproj:
+    ext-seemscloud-helm-charts:
+      url: https://github.com/seemscloud/helm-charts.git
+      name: "[Ext][SeemsCloud] Helm Charts"
+      type: git
+      insecure: "true"
+    ext-argoproj-helm-charts:
       url: https://argoproj.github.io/argo-helm
-      name: "[Ext][Helm] ArgoProj"
+      name: "[Ext][ArgoProj] Helm Charts"
       type: helm
       insecure: "true"
-    ext-helm-redpanda:
+    ext-redpanda-helm-charts:
       url: https://charts.redpanda.com
-      name: "[Ext][Helm] Redpanda"
+      name: "[Ext][RedPanda] Helm Charts"
       type: helm
       insecure: "true"
-    ext-helm-jetstack:
+    ext-jetstack-helm-charts:
       url: https://charts.jetstack.io
-      name: "[Ext][Helm] JetStack"
+      name: "[Ext][JetStack] Helm Charts"
       type: helm
       insecure: "true"
 
