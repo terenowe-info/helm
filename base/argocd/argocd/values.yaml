@@ -95,6 +95,10 @@ server:
       cert-manager.io/cluster-issuer: cert-manager-letsencrypt-prod
     hosts:
       - argocd.local.sigma.prod.terenowe.l3t.io
+    tls:
+      - secretName: argocd-server-tls
+        hosts:
+          - argocd.local.sigma.prod.terenowe.l3t.io
 
 repoServer:
   replicas: 2
