@@ -83,14 +83,11 @@ configs:
 server:
   replicas: 1
 
-  service:
-    type: LoadBalancer
-    annotations:
-      networking.gke.io/load-balancer-type: "Internal"
-      networking.gke.io/internal-load-balancer-subnet: "gke-sigma-prod-aaa-lb"
-    servicePortHttp: 80
-    servicePortHttps: 443
-    loadBalancerIP: "10.150.150.10"
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    hosts:
+      - argocd.local.sigma.prod.terenowe.l3t.io
 
 repoServer:
   replicas: 2
