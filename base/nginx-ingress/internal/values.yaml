@@ -1,3 +1,5 @@
+ameOverride: nginx-ingress-internal
+
 controller:
   terminationGracePeriodSeconds: 1
   replicaCount: 1
