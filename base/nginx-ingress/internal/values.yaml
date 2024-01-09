@@ -1,8 +1,4 @@
-fullnameOverride: nginx-ingres
-
 controller:
-  name: internal
-
   terminationGracePeriodSeconds: 1
   replicaCount: 1
 
