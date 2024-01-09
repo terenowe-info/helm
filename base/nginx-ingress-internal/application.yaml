@@ -1,13 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: nginx-ingress
+  name: nginx-ingress-internal
   namespace: argocd-system
 spec:
-  project: cert-manager-system
+  project: nginx-ingress-system
   destination:
     server: https://kubernetes.default.svc
-    namespace: cert-manager-system
+    namespace: nginx-ingress-system
   syncPolicy:
     automated:
       prune: true
@@ -18,10 +18,10 @@ spec:
     - repoURL: https://github.com/terenowe-info/helm.git
       targetRevision: main
       ref: argocd-self
-    - chart: cert-manager
+    - chart: nginx-ingress
       repoURL: https://charts.jetstack.io
-      targetRevision: v1.13.2
+      targetRevision: 1.1.0
       helm:
-        releaseName: cert-manager
+        releaseName: nginx-ingress-internal
         valueFiles:
           - $argocd-self/base/cert-manager/values.yaml
