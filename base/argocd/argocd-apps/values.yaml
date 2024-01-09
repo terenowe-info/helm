@@ -44,3 +44,19 @@ projects:
     clusterResourceWhitelist:
       - group: '*'
         kind: '*'
+  - name: nginx-ingress-system
+    namespace: argocd-system
+    finalizers:
+      - resources-finalizer.argocd.argoproj.io
+    sourceRepos:
+      - 'https://github.com/terenowe-info/helm.git'
+      - 'https://helm.nginx.com/stable'
+    destinations:
+      - namespace: nginx-ingress-system
+        name: "in-cluster"
+        server: https://kubernetes.default.svc
+    clusterResourceWhitelist:
+      - group: '*'
+        kind: '*'
+
+
