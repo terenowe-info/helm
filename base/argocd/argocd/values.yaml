@@ -91,16 +91,9 @@ server:
   ingress:
     enabled: true
     ingressClassName: nginx
-    annotations:
-      cert-manager.io/cluster-issuer: cert-manager-letsencrypt-prod
-      acme.cert-manager.io/http01-edit-in-place: "true"
-      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     hosts:
       - argocd.local.sigma.prod.terenowe.l3t.io
-    tls:
-      - secretName: argocd-server-tls
-        hosts:
-          - argocd.local.sigma.prod.terenowe.l3t.io
+
 
 repoServer:
   replicas: 2
