@@ -94,8 +94,7 @@ server:
     annotations:
       cert-manager.io/cluster-issuer: cert-manager-letsencrypt-prod
       acme.cert-manager.io/http01-edit-in-place: "true"
-      nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
-      nginx.ingress.kubernetes.io/rewrite-target: /
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     hosts:
       - argocd.local.sigma.prod.terenowe.l3t.io
     tls:
