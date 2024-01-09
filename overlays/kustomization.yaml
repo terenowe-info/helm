@@ -6,4 +6,4 @@ resources:
   - ../base/argocd
   - ../base/cert-manager
   - ../base/cert-manager-wrapped
-  - ../base/nginx-ingress-internal
+  - ../base/nginx-ingress/internal
