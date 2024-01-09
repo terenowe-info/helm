@@ -1,0 +1,40 @@
+controller:
+  terminationGracePeriodSeconds: 1
+  replicaCount: 1
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+  ingressClass:
+    name: nginx
+    create: true
+
+  service:
+    create: true
+    type: LoadBalancer
+    annotations:
+      networking.gke.io/load-balancer-type: "Internal"
+      networking.gke.io/internal-load-balancer-subnet: "gke-sigma-prod-aaa-lb"
+    loadBalancerIP: "10.150.150.150"
+
+  containerPort:
+    http: 80
+    https: 443
+
+  httpPort:
+    enable: true
+    port: 80
+    targetPort: 80
+
+  httpsPort:
+    enable: true
+    port: 443
+    targetPort: 443
+
+rbac:
+  create: true
+
+prometheus:
+  create: true

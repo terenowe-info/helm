@@ -17,6 +17,11 @@ configs:
       name: "[Ext][ArgoProj] Helm Charts"
       type: helm
       insecure: "true"
+    ext-nginx-helm-charts:
+      url: https://helm.nginx.com/stable
+      name: "[Ext][NginxStable] Helm Charts"
+      type: helm
+      insecure: "true"
     ext-redpanda-helm-charts:
       url: https://charts.redpanda.com
       name: "[Ext][RedPanda] Helm Charts"
