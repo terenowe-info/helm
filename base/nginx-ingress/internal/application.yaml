@@ -19,7 +19,7 @@ spec:
       targetRevision: main
       ref: argocd-self
     - chart: nginx-ingress
-      repoURL: https://charts.jetstack.io
+      repoURL: https://helm.nginx.com/stable
       targetRevision: 1.1.0
       helm:
         releaseName: nginx-ingress-internal
