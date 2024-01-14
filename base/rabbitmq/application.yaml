@@ -15,7 +15,7 @@ spec:
     syncOptions:
       - CreateNamespace=true
   sources:
-    - repoURL: https://github.com/seemscloud/helm-argocd-self.git
+    - repoURL: https://github.com/terenowe-info/helm.git
       targetRevision: main
       ref: argocd-self
     - chart: rabbitmq
