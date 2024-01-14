@@ -1,0 +1,22 @@
+fullnameOverride: rabbitmq
+
+replicaCount: 3
+
+service:
+  type: LoadBalancer
+
+metrics:
+  enabled: false
+  serviceMonitor:
+    enabled: true
+
+persistence:
+  enabled: false
+
+auth:
+  username: admin
+  password: "admin"
+  erlangCookie: "Ih0wplVwoBGLAW0JibgNhSE97vB3Sktl"
+
+serviceAccount:
+  create: true
