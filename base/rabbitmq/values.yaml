@@ -25,3 +25,9 @@ auth:
 
 serviceAccount:
   create: true
+
+communityPlugins: |
+  https://github.com/noxdafox/rabbitmq-message-deduplication/releases/download/0.6.1/rabbitmq_message_deduplication-0.6.1.ez
+
+extraPlugins: |
+  rabbitmq_message_deduplication
