@@ -15,7 +15,8 @@ metrics:
     enabled: true
 
 persistence:
-  enabled: false
+  enabled: true
+  size: 1Gi
 
 auth:
   username: admin
