@@ -2,12 +2,12 @@ fullnameOverride: rabbitmq
 
 replicaCount: 1
 
-service:
-  type: LoadBalancer
-  annotations:
-    networking.gke.io/load-balancer-type: "Internal"
-    networking.gke.io/internal-load-balancer-subnet: "gke-sigma-prod-aaa-lb"
-  loadBalancerIP: "10.150.150.10"
+# service:
+#   type: LoadBalancer
+#   annotations:
+#     networking.gke.io/load-balancer-type: "Internal"
+#     networking.gke.io/internal-load-balancer-subnet: "gke-sigma-prod-aaa-lb"
+#   loadBalancerIP: "10.150.150.10"
 
 metrics:
   enabled: false
