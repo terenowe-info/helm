@@ -97,7 +97,7 @@ server:
     enabled: true
     ingressClassName: nginx
     hosts:
-      - argocd.local.sigma.prod.terenowe.l3t.io
+      - argocd.local.sigma.prod.terenowe.seems.cloud
 
 
 repoServer:
