@@ -94,7 +94,7 @@ resources:
                           number: 8080
                     path: /
                     pathType: Prefix
-            - host: diag.bajojajo.com
+            - host: bajojajo.com
               http:
                 paths:
                   - backend:
