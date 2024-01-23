@@ -99,7 +99,6 @@ server:
     hosts:
       - argocd.local.sigma.prod.terenowe.seems.cloud
 
-
 repoServer:
   replicas: 2
 
