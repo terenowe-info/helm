@@ -5,18 +5,75 @@ resources:
       namespace: ""
       labels: { }
       annotations: { }
-    resources: [ ]
-#      - apiVersion: cert-manager.io/v1
-#        kind: ClusterIssuer
-#        metadata:
-#          name: letsencrypt-prod
-#        spec:
-#          acme:
-#            server: https://acme-v02.api.letsencrypt.org/directory
-#            email: certificates@terenowe.info
-#            privateKeySecretRef:
-#              name: letsencrypt-prod
-#            solvers:
-#              - http01:
-#                  ingress:
-#                    ingressClassName: nginx
+    resources:
+      - apiVersion: cert-manager.io/v1
+        kind: ClusterIssuer
+        metadata:
+          name: letsencrypt-prod
+        spec:
+          acme:
+            server: https://acme-v02.api.letsencrypt.org/directory
+            email: certificates@terenowe.info
+            privateKeySecretRef:
+              name: letsencrypt-prod
+            solvers:
+              - http01:
+                  ingress:
+                    ingressClassName: nginx
+      - apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+          name: hostname
+          labels:
+            app: hostname
+        spec:
+          replicas: 1
+          selector:
+            matchLabels:
+              app: hostname
+          template:
+            metadata:
+              labels:
+                app: hostname
+            spec:
+              volumes:
+                - name: app
+                  configMap:
+                    name: apps-hostname
+              containers:
+                - name: hostname
+                  image: python:3.11-alpine3.19
+                  workingDir: /app
+                  volumeMounts:
+                    - mountPath: /app/main.py
+                      name: app
+                      subPath: main.py
+                  command:
+                    - /bin/sh
+                    - -c
+                  args:
+                    - |
+                      pip3 install --upgrade pip
+                      pip3 install uvicorn fastapi
+
+                      mkdir -p /app
+
+                      cd /app
+
+                      uvicorn main:app \
+                        --host 0.0.0.0 \
+                        --port 8080
+      - apiVersion: v1
+        kind: ConfigMap
+        metadata:
+          name: hostname
+        data:
+          main.py: |
+            from fastapi import FastAPI, Request
+
+            app = FastAPI()
+
+
+            @app.get("/")
+            def read_root(request: Request):
+                return {"Hello": request.client.host}
