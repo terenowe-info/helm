@@ -94,3 +94,13 @@ resources:
                           number: 8080
                     path: /
                     pathType: Prefix
+            - host: headers.l3t.io
+              http:
+                paths:
+                  - backend:
+                      service:
+                        name: apps-hostname
+                        port:
+                          number: 8080
+                    path: /
+                    pathType: Prefix
