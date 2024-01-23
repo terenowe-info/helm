@@ -54,13 +54,14 @@ resources:
         data:
           main.py: |
             from fastapi import FastAPI, Request
+            import socket
 
             app = FastAPI()
 
 
             @app.get("/")
             def read_root(request: Request):
-                return {"address": request.client.host}
+                return {"address": request.client.host, "xxx":socket.gethostname()}
       - apiVersion: v1
         kind: Service
         metadata:
