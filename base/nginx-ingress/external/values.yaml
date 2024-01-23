@@ -1,5 +1,11 @@
 fullnameOverride: nginx-ingress-external
 
+rbac:
+  create: true
+
+prometheus:
+  create: true
+
 controller:
   terminationGracePeriodSeconds: 1
   replicaCount: 1
@@ -13,9 +19,9 @@ controller:
     name: nginx-external
     create: true
 
-  service:
-    create: true
-    type: LoadBalancer
+  reportIngressStatus:
+    enableLeaderElection: true
+    leaderElectionLockName: "nginx-ingress-external-leader"
 
   containerPort:
     http: 80
@@ -31,8 +37,6 @@ controller:
     port: 443
     targetPort: 443
 
-rbac:
-  create: true
-
-prometheus:
-  create: true
+  service:
+    create: true
+    type: LoadBalancer

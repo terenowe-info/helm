@@ -1,5 +1,11 @@
 fullnameOverride: nginx-ingress-internal
 
+rbac:
+  create: true
+
+prometheus:
+  create: true
+
 controller:
   terminationGracePeriodSeconds: 1
   replicaCount: 1
@@ -13,17 +19,9 @@ controller:
     name: nginx-internal
     create: true
 
-  service:
-    create: true
-    type: LoadBalancer
-    annotations:
-      networking.gke.io/load-balancer-type: "Internal"
-      networking.gke.io/internal-load-balancer-subnet: "gke-sigma-prod-aaa-lb"
-    loadBalancerIP: "10.150.150.150"
-
   reportIngressStatus:
     enableLeaderElection: true
-    leaderElectionLockName: "nginx-ingress-projects-leader"
+    leaderElectionLockName: "nginx-ingress-internal-leader"
 
   containerPort:
     http: 80
@@ -39,8 +37,10 @@ controller:
     port: 443
     targetPort: 443
 
-rbac:
-  create: true
-
-prometheus:
-  create: true
+  service:
+    create: true
+    type: LoadBalancer
+    annotations:
+      networking.gke.io/load-balancer-type: "Internal"
+      networking.gke.io/internal-load-balancer-subnet: "gke-sigma-prod-aaa-lb"
+    loadBalancerIP: "10.150.150.150"
