@@ -44,3 +44,7 @@ controller:
       networking.gke.io/load-balancer-type: "Internal"
       networking.gke.io/internal-load-balancer-subnet: "gke-sigma-prod-aaa-lb"
     loadBalancerIP: "10.150.150.150"
+
+  config:
+    entries:
+      proxy-protocol: "True"
