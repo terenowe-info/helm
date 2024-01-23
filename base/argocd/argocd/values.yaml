@@ -95,7 +95,7 @@ server:
 
   ingress:
     enabled: true
-    ingressClassName: nginx
+    ingressClassName: nginx-internal
     hosts:
       - argocd.local.sigma.prod.terenowe.seems.cloud
 
