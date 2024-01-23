@@ -1,4 +1,4 @@
-ameOverride: nginx-ingress-external
+nameOverride: nginx-ingress-external
 
 controller:
   terminationGracePeriodSeconds: 1
