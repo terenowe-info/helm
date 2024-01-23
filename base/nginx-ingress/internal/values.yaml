@@ -47,4 +47,4 @@ controller:
 
   config:
     entries:
-      proxy-protocol: "True"
+      proxy-protocol: "true"
