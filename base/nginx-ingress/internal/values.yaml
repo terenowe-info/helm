@@ -10,7 +10,7 @@ controller:
       memory: 128Mi
 
   ingressClass:
-    name: nginx-external
+    name: nginx-internal
     create: true
 
   service:
