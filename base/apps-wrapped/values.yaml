@@ -61,7 +61,7 @@ resources:
 
             @app.get("/")
             def read_root(request: Request):
-                return {"address": request.client.host, "xxx":socket.gethostname()}
+                return {"address": request.client.host, "headers": request.headers}
       - apiVersion: v1
         kind: Service
         metadata:
