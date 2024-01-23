@@ -60,7 +60,7 @@ resources:
 
             @app.get("/")
             def read_root(request: Request):
-                return {"Hello": request.client.host}
+                return {"address": request.client.host}
       - apiVersion: v1
         kind: Service
         metadata:
