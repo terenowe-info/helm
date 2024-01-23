@@ -40,3 +40,7 @@ controller:
   service:
     create: true
     type: LoadBalancer
+
+  config:
+    entries:
+      use-proxy-protocol: "true"
