@@ -44,3 +44,4 @@ controller:
   config:
     entries:
       use-proxy-protocol: "true"
+      use-forwarded-headers: "true"
