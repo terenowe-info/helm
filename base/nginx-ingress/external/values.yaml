@@ -16,7 +16,6 @@ controller:
   service:
     create: true
     type: LoadBalancer
-    loadBalancerIP: "10.150.150.150"
 
   containerPort:
     http: 80
