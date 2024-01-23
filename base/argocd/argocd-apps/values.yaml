@@ -58,5 +58,17 @@ projects:
     clusterResourceWhitelist:
       - group: '*'
         kind: '*'
-
-
+  - name: apps-system
+    namespace: argocd-system
+    finalizers:
+      - resources-finalizer.argocd.argoproj.io
+    sourceRepos:
+      - 'https://github.com/terenowe-info/helm.git'
+      - 'https://github.com/seemscloud/helm-charts.git'
+    destinations:
+      - namespace: apps-system
+        name: "in-cluster"
+        server: https://kubernetes.default.svc
+    clusterResourceWhitelist:
+      - group: '*'
+        kind: '*'
