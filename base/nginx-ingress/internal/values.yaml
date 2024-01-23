@@ -46,5 +46,5 @@ controller:
     loadBalancerIP: "10.150.150.150"
 
   config:
-    entries: {}
-#      proxy-protocol: "true"
+    entries:
+      use-proxy-protocol: "true"
