@@ -77,6 +77,10 @@ resources:
         kind: Ingress
         metadata:
           name: hostname
+          annotations:
+            nginx.ingress.kubernetes.io/configuration-snippet: |
+              proxy_set_header Forwarded $proxy_add_forwarded;
+              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         spec:
           ingressClassName: nginx-external
           rules:
