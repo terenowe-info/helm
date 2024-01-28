@@ -39,12 +39,6 @@ resources:
                     - -c
                   args:
                     - |
-                      pwd 
-                      ls -lha
-                      mkdir -p /app
-                      pwd
-                      ls -lha
-                      
                       python3 -m venv .venv
                       source .venv/bin/activate
                       
@@ -58,11 +52,15 @@ resources:
                     - name: config
                       subPath: main.py
                       mountPath: /app/main.py
+                    - name: pip-cache
+                      mountPath: /app/.venv
                   command:
                     - /bin/sh
                     - -c
                   args:
                     - |
+                      source .venv/bin/activate
+                      
                       uvicorn main:app \
                         --host 0.0.0.0 \
                         --port 8080
