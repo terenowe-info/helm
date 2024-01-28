@@ -15,7 +15,7 @@ spec:
     - helm:
         releaseName: apps-headers
         valueFiles:
-          - $argocd-self/base/apps-wrapped/values.yaml
+          - $argocd-self/base/apps-wrapped/headers/values.yaml
       repoURL: https://github.com/seemscloud/helm-charts.git
       path: charts/wrapper
       targetRevision: main
