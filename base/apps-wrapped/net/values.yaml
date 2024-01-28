@@ -120,7 +120,7 @@ resources:
 
             @app.get("/")
             def root(request: Request):
-                return request.net
+                return request.headers
             
             @app.get("/{address_name}/{port}")
             def tcp(address_name, port, request: Request):
