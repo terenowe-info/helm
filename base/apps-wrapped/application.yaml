@@ -27,6 +27,8 @@ spec:
       - CreateNamespace=true
       - RespectIgnoreDifferences=true
   ignoreDifferences:
-    - kind: Ingress
+    - group: networking.k8s.io/v1
+      kind: Ingress
+      name: apps-hostname
       jsonPointers:
         - /spec
