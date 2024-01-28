@@ -69,6 +69,10 @@ resources:
             @app.get("/")
             def read_root(request: Request):
                 return request.headers
+            
+            @app.get("/healthz")
+            def read_root(request: Request):
+                return "OK"
       - apiVersion: v1
         kind: Service
         metadata:
