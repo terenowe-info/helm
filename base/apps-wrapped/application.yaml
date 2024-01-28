@@ -27,6 +27,6 @@ spec:
       - CreateNamespace=true
   ignoreDifferences:
     - kind: Ingress
-      name: apps-hostname
+      name: hostname
       jqPathExpressions:
         - .spec.rules
