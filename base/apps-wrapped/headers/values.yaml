@@ -32,6 +32,13 @@ resources:
                 - name: init
                   image: python:3.11-alpine3.19
                   workingDir: /app
+                  resources:
+                    requests:
+                      cpu: 100m
+                      memory: 128Mi
+                    limits:
+                      cpu: 300m
+                      memory: 128Mi
                   volumeMounts:
                     - name: pip-cache
                       mountPath: /app/.venv
@@ -76,6 +83,13 @@ resources:
                     successThreshold: 1
                     failureThreshold: 1
                     timeoutSeconds: 1
+                  resources:
+                    requests:
+                      cpu: 50m
+                      memory: 64Mi
+                    limits:
+                      cpu: 50m
+                      memory: 64Mi
                   volumeMounts:
                     - name: config
                       subPath: main.py
