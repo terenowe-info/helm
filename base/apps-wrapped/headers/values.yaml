@@ -85,10 +85,10 @@ resources:
                     timeoutSeconds: 1
                   resources:
                     requests:
-                      cpu: 50m
+                      cpu: 100m
                       memory: 64Mi
                     limits:
-                      cpu: 150m
+                      cpu: 300m
                       memory: 64Mi
                   volumeMounts:
                     - name: config
