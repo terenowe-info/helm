@@ -27,5 +27,5 @@ spec:
       - CreateNamespace=true
   ignoreDifferences:
     - kind: Ingress
-      jsonPointers:
-        - /spec
+      jqPathExpressions:
+        - .spec
