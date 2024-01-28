@@ -9,22 +9,22 @@ resources:
       - apiVersion: apps/v1
         kind: Deployment
         metadata:
-          name: headers
+          name: net
         spec:
           replicas: 1
           selector:
             matchLabels:
-              app: apps-headers
+              app: apps-net
           template:
             metadata:
               labels:
-                app: apps-headers
+                app: apps-net
             spec:
               terminationGracePeriodSeconds: 1
               volumes:
                 - name: config
                   configMap:
-                    name: apps-headers
+                    name: apps-net
                 - name: pip-cache
                   emptyDir:
                     sizeLimit: 1Gi
@@ -53,7 +53,7 @@ resources:
                       pip3 install --upgrade pip
                       pip3 install uvicorn fastapi
               containers:
-                - name: headers
+                - name: net
                   image: python:3.11-alpine3.19
                   workingDir: /app
                   startupProbe:
@@ -109,7 +109,7 @@ resources:
       - apiVersion: v1
         kind: ConfigMap
         metadata:
-          name: headers
+          name: net
         data:
           main.py: |
             from fastapi import FastAPI, Request
@@ -120,7 +120,17 @@ resources:
 
             @app.get("/")
             def root(request: Request):
-                return request.headers
+                return request.net
+            
+            @app.get("/{address_name}/{port}")
+            def tcp(address_name, port, request: Request):
+                sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                sock.settimeout(2)
+            
+                if sock.connect_ex((address_name,int(port))) == 0:
+                  return {"result": "ok"}
+                else:
+                  return {"result": "fail"}
             
             @app.get("/healthz")
             def healthz(request: Request):
@@ -128,10 +138,10 @@ resources:
       - apiVersion: v1
         kind: Service
         metadata:
-          name: headers
+          name: net
         spec:
           selector:
-            app: apps-headers
+            app: apps-net
           ports:
             - protocol: TCP
               port: 8080
@@ -139,7 +149,7 @@ resources:
       - apiVersion: networking.k8s.io/v1
         kind: Ingress
         metadata:
-          name: headers-external
+          name: net-external
           annotations:
             cert-manager.io/cluster-issuer: cert-manager-letsencrypt-prod
             acme.cert-manager.io/http01-edit-in-place: "true"
@@ -152,15 +162,15 @@ resources:
           ingressClassName: nginx-external
           tls:
             - hosts:
-                - headers.sigma.bajojajo.com
-              secretName: headers-sigma-bajojajo-tls
+                - net.sigma.bajojajo.com
+              secretName: net-sigma-bajojajo-tls
           rules:
-            - host: headers.sigma.bajojajo.com
+            - host: net.sigma.bajojajo.com
               http:
                 paths:
                   - backend:
                       service:
-                        name: apps-headers
+                        name: apps-net
                         port:
                           number: 8080
                     path: /
@@ -168,7 +178,7 @@ resources:
       - apiVersion: networking.k8s.io/v1
         kind: Ingress
         metadata:
-          name: headers-internal
+          name: net-internal
           annotations:
             nginx.ingress.kubernetes.io/configuration-snippet: |
               proxy_set_header Forwarded $proxy_add_forwarded;
@@ -176,12 +186,12 @@ resources:
         spec:
           ingressClassName: nginx-internal
           rules:
-            - host: headers.local.sigma.prod.terenowe.seems.cloud
+            - host: net.local.sigma.prod.terenowe.seems.cloud
               http:
                 paths:
                   - backend:
                       service:
-                        name: apps-headers
+                        name: apps-net
                         port:
                           number: 8080
                     path: /

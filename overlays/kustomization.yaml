@@ -8,5 +8,5 @@ resources:
   - ../base/nginx-ingress/internal
   - ../base/nginx-ingress/external
   - ../base/rabbitmq
-  - ../base/apps-wrapped/headers
+  - ../base/apps-wrapped/net
   - ../base/apps-wrapped/tcp
