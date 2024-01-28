@@ -122,7 +122,7 @@ resources:
             def root(request: Request):
                 return request.headers
             
-            @app.get("/{address_name}/{port}")
+            @app.get("/tcp/{address_name}/{port}")
             def tcp(address_name, port, request: Request):
                 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                 sock.settimeout(2)
@@ -132,7 +132,7 @@ resources:
                 else:
                   return {"result": "fail"}
             
-            @app.get("/{domain}/{server}")
+            @app.get("/dns/{domain}/{server}")
             def dns(domain, server, request: Request):
                 resolver = dns.resolver.Resolver()
                 resolver.nameservers = [server]
