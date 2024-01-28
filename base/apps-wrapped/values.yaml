@@ -1,4 +1,4 @@
-fullnameOverride: "client-headers"
+fullnameOverride: "apps"
 
 resources:
   - metadata:
@@ -9,23 +9,23 @@ resources:
       - apiVersion: apps/v1
         kind: Deployment
         metadata:
-          name: app
+          name: headers
         spec:
           replicas: 1
           selector:
             matchLabels:
-              app: client-headers-app
+              app: apps-headers
           template:
             metadata:
               labels:
-                app: client-headers-app
+                app: apps-headers
             spec:
               volumes:
                 - name: config
                   configMap:
-                    name: client-headers-hostname
+                    name: apps-headers
               containers:
-                - name: hostname
+                - name: headers
                   image: python:3.11-alpine3.19
                   workingDir: /app
                   volumeMounts:
@@ -50,7 +50,7 @@ resources:
       - apiVersion: v1
         kind: ConfigMap
         metadata:
-          name: app
+          name: headers
         data:
           main.py: |
             from fastapi import FastAPI, Request
@@ -65,10 +65,10 @@ resources:
       - apiVersion: v1
         kind: Service
         metadata:
-          name: app
+          name: headers
         spec:
           selector:
-            app: client-headers-hostname
+            app: apps-headers
           ports:
             - protocol: TCP
               port: 8080
@@ -76,7 +76,7 @@ resources:
       - apiVersion: networking.k8s.io/v1
         kind: Ingress
         metadata:
-          name: app
+          name: headers
           annotations:
             nginx.ingress.kubernetes.io/configuration-snippet: |
               proxy_set_header Forwarded $proxy_add_forwarded;
@@ -84,12 +84,12 @@ resources:
         spec:
           ingressClassName: nginx-external
           rules:
-            - host: hostname.sigma.prod.terenowe.seems.cloud
+            - host: headers.sigma.prod.terenowe.seems.cloud
               http:
                 paths:
                   - backend:
                       service:
-                        name: client-headers-hostname
+                        name: apps-headers
                         port:
                           number: 8080
                     path: /
@@ -99,7 +99,7 @@ resources:
                 paths:
                   - backend:
                       service:
-                        name: client-headers-hostname
+                        name: apps-headers
                         port:
                           number: 8080
                     path: /
