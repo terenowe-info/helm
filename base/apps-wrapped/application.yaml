@@ -26,8 +26,6 @@ spec:
     syncOptions:
       - CreateNamespace=true
   ignoreDifferences:
-    - group: networking.k8s.io/v1
-      kind: Ingress
-      name: apps-hostname
+    - kind: Ingress
       jsonPointers:
-        - .spec.rules[]
+        - .spec
