@@ -30,3 +30,5 @@ spec:
     - kind: Ingress
       jsonPointers:
         - /spec/rules/0
+        - /spec/rules/1
+        - /spec/rules/2
