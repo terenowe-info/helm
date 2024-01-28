@@ -31,7 +31,7 @@ resources:
                       cpu: 100m
                       memory: 128Mi
                     limits:
-                      cpu: 100m
+                      cpu: 300m
                       memory: 128Mi
                   image: python:3.11-alpine3.19
                   workingDir: /app
