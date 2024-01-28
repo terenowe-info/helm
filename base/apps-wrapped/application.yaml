@@ -31,3 +31,7 @@ spec:
       name: apps-hostname
       jsonPointers:
         - .spec.rules
+    - kind: Ingress
+      name: apps-hostname
+      jsonPointers:
+        - .spec.rules
