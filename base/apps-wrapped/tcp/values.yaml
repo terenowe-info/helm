@@ -118,7 +118,7 @@ resources:
             app = FastAPI()
             
             
-            @app.get("/{address_name}/{port}")
+            @app.get("/")
             def read_root(request: Request):
                 return {"result": "ok"}
             
