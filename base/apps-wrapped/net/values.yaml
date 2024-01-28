@@ -114,6 +114,7 @@ resources:
           main.py: |
             from fastapi import FastAPI, Request
             import socket
+            import dns.resolver
 
             app = FastAPI()
 
