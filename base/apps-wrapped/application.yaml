@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: apps-wrapped
+  name: apps-headers
   namespace: argocd-system
 spec:
   destination:
