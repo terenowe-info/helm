@@ -28,4 +28,4 @@ spec:
   ignoreDifferences:
     - kind: Ingress
       jqPathExpressions:
-        - .spec
+        - '.spec'
