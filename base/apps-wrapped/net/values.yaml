@@ -51,7 +51,7 @@ resources:
                       source .venv/bin/activate
                       
                       pip3 install --upgrade pip
-                      pip3 install uvicorn fastapi
+                      pip3 install uvicorn fastapi dnspython
               containers:
                 - name: net
                   image: python:3.11-alpine3.19
@@ -131,6 +131,17 @@ resources:
                   return {"result": "ok"}
                 else:
                   return {"result": "fail"}
+            
+            @app.get("/{domain}/{server}")
+            def dns(domain, server, request: Request):
+                resolver = dns.resolver.Resolver()
+                resolver.nameservers = [server]
+            
+                try:
+                    answers = resolver.query(domain)
+                    return {"result": "ok"}
+                except dns.exception.DNSException as e:
+                    return {"result": "fail"}
             
             @app.get("/healthz")
             def healthz(request: Request):
