@@ -28,5 +28,5 @@ spec:
       - RespectIgnoreDifferences=true
   ignoreDifferences:
     - kind: Ingress
-      jqPathExpressions:
-        - '.spec.rules[]'
+      jsonPointers:
+        - /spec/rules/0
