@@ -29,6 +29,6 @@ spec:
   ignoreDifferences:
     - group: networking.k8s.io/v1
       kind: Ingress
-      name: client-headers-app
+      name: apps-headers
       jsonPointers:
         - /spec/rules
