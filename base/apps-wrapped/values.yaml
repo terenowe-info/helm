@@ -20,6 +20,7 @@ resources:
               labels:
                 app: apps-headers
             spec:
+              terminationGracePeriodSeconds: 1
               volumes:
                 - name: config
                   configMap:
@@ -48,6 +49,33 @@ resources:
                 - name: headers
                   image: python:3.11-alpine3.19
                   workingDir: /app
+                  startupProbe:
+                    httpGet:
+                      path: /healthz
+                      port: 8080
+                    initialDelaySeconds: 3
+                    periodSeconds: 2
+                    successThreshold: 1
+                    failureThreshold: 1
+                    timeoutSeconds: 1
+                  readinessProbe:
+                    httpGet:
+                      path: /healthz
+                      port: 8080
+                    initialDelaySeconds: 1
+                    periodSeconds: 2
+                    successThreshold: 1
+                    failureThreshold: 1
+                    timeoutSeconds: 1
+                  livenessProbe:
+                    httpGet:
+                      path: /healthz
+                      port: 8080
+                    initialDelaySeconds: 1
+                    periodSeconds: 2
+                    successThreshold: 1
+                    failureThreshold: 1
+                    timeoutSeconds: 1
                   volumeMounts:
                     - name: config
                       subPath: main.py
