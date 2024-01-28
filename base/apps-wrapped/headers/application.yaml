@@ -13,7 +13,7 @@ spec:
       repoURL: https://github.com/terenowe-info/helm.git
       targetRevision: main
     - helm:
-        releaseName: apps
+        releaseName: apps-headers
         valueFiles:
           - $argocd-self/base/apps-wrapped/values.yaml
       repoURL: https://github.com/seemscloud/helm-charts.git
