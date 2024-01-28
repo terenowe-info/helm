@@ -28,4 +28,4 @@ spec:
   ignoreDifferences:
     - kind: Ingress
       jsonPointers:
-        - .spec
+        - /spec
