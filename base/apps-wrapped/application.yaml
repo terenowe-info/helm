@@ -29,7 +29,6 @@ spec:
   ignoreDifferences:
     - kind: Ingress
       name: apps-headers
+      namespace: apps-system
       jsonPointers:
-        - /spec/rules/0
-        - /spec/rules/1
-        - /spec/rules/2
+        - /spec/rules
