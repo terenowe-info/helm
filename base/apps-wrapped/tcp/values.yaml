@@ -145,7 +145,7 @@ resources:
       - apiVersion: networking.k8s.io/v1
         kind: Ingress
         metadata:
-          name: tcp
+          name: tcp-external
           annotations:
             cert-manager.io/cluster-issuer: cert-manager-letsencrypt-prod
             acme.cert-manager.io/http01-edit-in-place: "true"
@@ -161,7 +161,7 @@ resources:
                 - tcp.sigma.bajojajo.com
               secretName: tcp-sigma-bajojajo-tls
           rules:
-            - host: tcp.local.sigma.prod.terenowe.seems.cloud
+            - host: tcp.sigma.bajojajo.com
               http:
                 paths:
                   - backend:
@@ -171,7 +171,18 @@ resources:
                           number: 8080
                     path: /
                     pathType: Prefix
-            - host: tcp.sigma.bajojajo.com
+      - apiVersion: networking.k8s.io/v1
+        kind: Ingress
+        metadata:
+          name: tcp-internal
+          annotations:
+            nginx.ingress.kubernetes.io/configuration-snippet: |
+              proxy_set_header Forwarded $proxy_add_forwarded;
+              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        spec:
+          ingressClassName: nginx-internal
+          rules:
+            - host: tcp.local.sigma.prod.terenowe.seems.cloud
               http:
                 paths:
                   - backend:
