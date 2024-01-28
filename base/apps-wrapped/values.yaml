@@ -26,13 +26,13 @@ resources:
                     name: apps-headers
               containers:
                 - name: headers
-#                  resources:
-#                    requests:
-#                      cpu: 10m
-#                      memory: 64Mi
-#                    limits:
-#                      cpu: 100m
-#                      memory: 64Mi
+                  resources:
+                    requests:
+                      cpu: 100m
+                      memory: 128Mi
+                    limits:
+                      cpu: 100m
+                      memory: 128Mi
                   image: python:3.11-alpine3.19
                   workingDir: /app
                   volumeMounts:
