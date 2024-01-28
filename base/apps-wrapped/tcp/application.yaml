@@ -29,6 +29,6 @@ spec:
   ignoreDifferences:
     - kind: Ingress
       group: networking.k8s.io
-      name: apps-tcp
+      name: apps-tcp-external
       jsonPointers:
         - /spec/rules
