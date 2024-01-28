@@ -159,9 +159,9 @@ resources:
           tls:
             - hosts:
                 - tcp.sigma.bajojajo.com
-              secretName: testsecret-tls
+              secretName: tcp-sigma-bajojajo-tls
           rules:
-            - host: tcp.sigma.prod.terenowe.seems.cloud
+            - host: tcp.local.sigma.prod.terenowe.seems.cloud
               http:
                 paths:
                   - backend:
