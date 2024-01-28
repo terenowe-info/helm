@@ -24,15 +24,34 @@ resources:
                 - name: config
                   configMap:
                     name: apps-headers
+                - name: pip-cache
+                  emptyDir:
+                    sizeLimit: 1Gi
+              initContainers:
+                - name: init
+                  image: python:3.11-alpine3.19
+                  workingDir: /app
+                  volumeMounts:
+                    - name: pip-cache
+                      mountPath: /app/.venv
+                  command:
+                    - /bin/sh
+                    - -c
+                  args:
+                    - |
+                      pwd 
+                      ls -lha
+                      mkdir -p /app
+                      pwd
+                      ls -lha
+                      
+                      python3 -m venv .venv
+                      source .venv/bin/activate
+                      
+                      pip3 install --upgrade pip
+                      pip3 install uvicorn fastapi
               containers:
                 - name: headers
-                  resources:
-                    requests:
-                      cpu: 100m
-                      memory: 128Mi
-                    limits:
-                      cpu: 300m
-                      memory: 128Mi
                   image: python:3.11-alpine3.19
                   workingDir: /app
                   volumeMounts:
@@ -44,13 +63,6 @@ resources:
                     - -c
                   args:
                     - |
-                      pip3 install --upgrade pip
-                      pip3 install uvicorn fastapi
-
-                      mkdir -p /app
-
-                      cd /app
-
                       uvicorn main:app \
                         --host 0.0.0.0 \
                         --port 8080
