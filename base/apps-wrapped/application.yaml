@@ -26,8 +26,7 @@ spec:
     syncOptions:
       - CreateNamespace=true
   ignoreDifferences:
-    - group: networking.k8s.io/v1
-      kind: Ingress
+    - kind: Ingress
       name: apps-hostname
       jqPathExpressions:
         - .spec.rules
