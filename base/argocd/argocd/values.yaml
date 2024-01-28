@@ -108,6 +108,12 @@ applicationSet:
 controller:
   replicas: 1
 
+  env:
+    - name: ARGOCD_K8S_CLIENT_QPS
+      value: "100"
+    - name: ARGOCD_K8S_CLIENT_BURST
+      value: "200"
+
 redis:
   enabled: true
 
