@@ -9,4 +9,3 @@ resources:
   - ../base/nginx-ingress/external
   - ../base/rabbitmq
   - ../base/apps-wrapped/net
-  - ../base/apps-wrapped/tcp
