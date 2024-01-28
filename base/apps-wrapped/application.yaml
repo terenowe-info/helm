@@ -25,9 +25,9 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
-      - RespectIgnoreDifferences=false
+      - RespectIgnoreDifferences=true
   ignoreDifferences:
     - kind: Ingress
       name: apps-headers
       jsonPointers:
-        - /spec/rules
+        - /spec
