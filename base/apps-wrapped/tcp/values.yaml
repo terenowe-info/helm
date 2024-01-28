@@ -1,0 +1,183 @@
+fullnameOverride: "apps"
+
+resources:
+  - metadata:
+      namespace: ""
+      labels: { }
+      annotations: { }
+    resources:
+      - apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+          name: tcp
+        spec:
+          replicas: 1
+          selector:
+            matchLabels:
+              app: apps-tcp
+          template:
+            metadata:
+              labels:
+                app: apps-tcp
+            spec:
+              terminationGracePeriodSeconds: 1
+              volumes:
+                - name: config
+                  configMap:
+                    name: apps-tcp
+                - name: pip-cache
+                  emptyDir:
+                    sizeLimit: 1Gi
+              initContainers:
+                - name: init
+                  image: python:3.11-alpine3.19
+                  workingDir: /app
+                  resources:
+                    requests:
+                      cpu: 100m
+                      memory: 128Mi
+                    limits:
+                      cpu: 500m
+                      memory: 128Mi
+                  volumeMounts:
+                    - name: pip-cache
+                      mountPath: /app/.venv
+                  command:
+                    - /bin/sh
+                    - -c
+                  args:
+                    - |
+                      python3 -m venv .venv
+                      source .venv/bin/activate
+                      
+                      pip3 install --upgrade pip
+                      pip3 install uvicorn fastapi
+              containers:
+                - name: tcp
+                  image: python:3.11-alpine3.19
+                  workingDir: /app
+                  startupProbe:
+                    httpGet:
+                      path: /healthz
+                      port: 8080
+                    initialDelaySeconds: 10
+                    periodSeconds: 2
+                    successThreshold: 1
+                    failureThreshold: 1
+                    timeoutSeconds: 1
+                  readinessProbe:
+                    httpGet:
+                      path: /healthz
+                      port: 8080
+                    initialDelaySeconds: 2
+                    periodSeconds: 2
+                    successThreshold: 1
+                    failureThreshold: 1
+                    timeoutSeconds: 1
+                  livenessProbe:
+                    httpGet:
+                      path: /healthz
+                      port: 8080
+                    initialDelaySeconds: 2
+                    periodSeconds: 2
+                    successThreshold: 1
+                    failureThreshold: 1
+                    timeoutSeconds: 1
+                  resources:
+                    requests:
+                      cpu: 100m
+                      memory: 64Mi
+                    limits:
+                      cpu: 300m
+                      memory: 64Mi
+                  volumeMounts:
+                    - name: config
+                      subPath: main.py
+                      mountPath: /app/main.py
+                    - name: pip-cache
+                      mountPath: /app/.venv
+                  command:
+                    - /bin/sh
+                    - -c
+                  args:
+                    - |
+                      source .venv/bin/activate
+                      
+                      uvicorn main:app \
+                        --host 0.0.0.0 \
+                        --port 8080
+      - apiVersion: v1
+        kind: ConfigMap
+        metadata:
+          name: tcp
+        data:
+          main.py: |
+            from fastapi import FastAPI, Request
+            import socket
+
+            app = FastAPI()
+            
+            
+            @app.get("/{address_name}/{port}")
+            def read_root(request: Request):
+                sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                sock.settimeout(2)
+            
+                if sock.connect_ex((address_name,int(port))) == 0:
+                  return {"result": "ok"}
+                else:
+                  return {"result": "fail"}
+            
+            @app.get("/healthz")
+            def read_root(request: Request):
+                return "OK"
+      - apiVersion: v1
+        kind: Service
+        metadata:
+          name: tcp
+        spec:
+          selector:
+            app: apps-tcp
+          ports:
+            - protocol: TCP
+              port: 8080
+              targetPort: 8080
+      - apiVersion: networking.k8s.io/v1
+        kind: Ingress
+        metadata:
+          name: tcp
+          annotations:
+            cert-manager.io/cluster-issuer: cert-manager-letsencrypt-prod
+            acme.cert-manager.io/http01-edit-in-place: "true"
+            nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+            nginx.ingress.kubernetes.io/rewrite-target: /
+            nginx.ingress.kubernetes.io/configuration-snippet: |
+              proxy_set_header Forwarded $proxy_add_forwarded;
+              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        spec:
+          ingressClassName: nginx-external
+          tls:
+            - hosts:
+                - tcp.sigma.bajojajo.com
+              secretName: testsecret-tls
+          rules:
+            - host: tcp.sigma.prod.terenowe.seems.cloud
+              http:
+                paths:
+                  - backend:
+                      service:
+                        name: apps-tcp
+                        port:
+                          number: 8080
+                    path: /
+                    pathType: Prefix
+            - host: tcp.sigma.bajojajo.com
+              http:
+                paths:
+                  - backend:
+                      service:
+                        name: apps-tcp
+                        port:
+                          number: 8080
+                    path: /
+                    pathType: Prefix
