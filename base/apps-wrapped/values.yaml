@@ -78,11 +78,16 @@ resources:
         metadata:
           name: headers
           annotations:
+            cert-manager.io/cluster-issuer: cert-manager-letsencrypt-prod
             nginx.ingress.kubernetes.io/configuration-snippet: |
               proxy_set_header Forwarded $proxy_add_forwarded;
               proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         spec:
           ingressClassName: nginx-external
+          tls:
+            - hosts:
+                - headers.sigma.bajojajo.com
+              secretName: testsecret-tls
           rules:
             - host: headers.sigma.prod.terenowe.seems.cloud
               http:
