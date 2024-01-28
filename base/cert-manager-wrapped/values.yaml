@@ -19,4 +19,7 @@ resources:
             solvers:
               - http01:
                   ingress:
-                    ingressClassName: nginx
+                    ingressClassName: nginx-internal
+              - http01:
+                  ingress:
+                    ingressClassName: nginx-external
