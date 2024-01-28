@@ -18,7 +18,7 @@ resources:
           template:
             metadata:
               labels:
-                app: client-headers-hostname
+                app: client-headers-app
             spec:
               volumes:
                 - name: config
