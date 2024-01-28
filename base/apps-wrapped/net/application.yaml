@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: apps-headers
+  name: apps-net
   namespace: argocd-system
 spec:
   destination:
@@ -13,9 +13,9 @@ spec:
       repoURL: https://github.com/terenowe-info/helm.git
       targetRevision: main
     - helm:
-        releaseName: apps-headers
+        releaseName: apps-net
         valueFiles:
-          - $argocd-self/base/apps-wrapped/headers/values.yaml
+          - $argocd-self/base/apps-wrapped/net/values.yaml
       repoURL: https://github.com/seemscloud/helm-charts.git
       path: charts/wrapper
       targetRevision: main
@@ -29,6 +29,6 @@ spec:
   ignoreDifferences:
     - kind: Ingress
       group: networking.k8s.io
-      name: apps-headers-external
+      name: apps-net-external
       jsonPointers:
         - /spec/rules
