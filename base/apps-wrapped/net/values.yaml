@@ -131,9 +131,9 @@ resources:
                 sock.settimeout(2)
             
                 if sock.connect_ex((address_name, int(port))) == 0:
-                    return Response(json.dumps({"status": "ok"}))
+                    return Response(json.dumps({"status": "success"}))
                 else:
-                    return Response(json.dumps({"status": "fail"}))
+                    return Response(json.dumps({"status": "failed"}))
             
             
             def flat_resolve(data=None):
@@ -156,10 +156,10 @@ resources:
                     if result:
                         return Response(json.dumps({"status": "success", "data": result}))
                     else:
-                        return Response(json.dumps({"status": "fail"}))
+                        return Response(json.dumps({"status": "failed"}))
             
                 except Exception as e:
-                    return Response(json.dumps({"status": "fail", "error": str(e)}))
+                    return Response(json.dumps({"status": "failed", "error": str(e)}))
             
             
             @app.get("/healthz")
