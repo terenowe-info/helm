@@ -51,7 +51,7 @@ resources:
                       source .venv/bin/activate
                       
                       pip3 install --upgrade pip
-                      pip3 install uvicorn fastapi dnspython
+                      pip3 install uvicorn fastapi dnspython json
               containers:
                 - name: net
                   image: python:3.11-alpine3.19
@@ -112,41 +112,59 @@ resources:
           name: net
         data:
           main.py: |
-            from fastapi import FastAPI, Request
+            from fastapi import FastAPI, Request, Response
             import socket
-            import dns.resolver
-
+            from dns import resolver as dns_resolver
+            import json
+            
             app = FastAPI()
-
-
+            
+            
             @app.get("/")
             def root(request: Request):
                 return request.headers
             
+            
             @app.get("/tcp/{address_name}/{port}")
-            def tcp(address_name, port, request: Request):
+            def tcp(address_name, port):
                 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                 sock.settimeout(2)
             
-                if sock.connect_ex((address_name,int(port))) == 0:
-                  return {"result": "ok"}
+                if sock.connect_ex((address_name, int(port))) == 0:
+                    return Response(json.dumps({"status": "ok"}))
                 else:
-                  return {"result": "fail"}
+                    return Response(json.dumps({"status": "fail"}))
             
-            @app.get("/dns/{domain}/{server}")
-            def dns(domain, server, request: Request):
-                resolver = dns.resolver.Resolver()
+            
+            def flat_resolve(data=None):
+                tmp = []
+            
+                for i in data:
+                    tmp.append(str(i))
+            
+                return tmp
+            
+            
+            @app.get("/dns/{domain}/{server}/{_type}")
+            def dns(domain, server, _type):
+                resolver = dns_resolver.Resolver()
                 resolver.nameservers = [server]
             
                 try:
-                    answers = resolver.query(domain)
-                    return {"result": "ok"}
-                except dns.exception.DNSException as e:
-                    return {"result": "fail"}
+                    result = flat_resolve(resolver.resolve(domain, _type))
+            
+                    if result:
+                        return Response(json.dumps({"status": "success", "data": result}))
+                    else:
+                        return Response(json.dumps({"status": "fail"}))
+            
+                except Exception as e:
+                    return Response(json.dumps({"status": "fail", "result": str(e)}))
+            
             
             @app.get("/healthz")
-            def healthz(request: Request):
-                return "OK"
+            def health():
+                return Response(json.dumps({"status": "healthy"}))
       - apiVersion: v1
         kind: Service
         metadata:
