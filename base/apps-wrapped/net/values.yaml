@@ -159,7 +159,7 @@ resources:
                         return Response(json.dumps({"status": "fail"}))
             
                 except Exception as e:
-                    return Response(json.dumps({"status": "fail", "result": str(e)}))
+                    return Response(json.dumps({"status": "fail", "error": str(e)}))
             
             
             @app.get("/healthz")
