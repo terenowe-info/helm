@@ -137,12 +137,7 @@ resources:
             
             
             def flat_resolve(data=None):
-                tmp = []
-            
-                for i in data:
-                    tmp.append(str(i))
-            
-                return tmp
+                return [str(i) for i in data]
             
             
             @app.get("/dns/{domain}/{server}/{_type}")
