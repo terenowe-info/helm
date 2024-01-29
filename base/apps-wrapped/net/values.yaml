@@ -51,7 +51,7 @@ resources:
                       source .venv/bin/activate
                       
                       pip3 install --upgrade pip
-                      pip3 install uvicorn fastapi dnspython json
+                      pip3 install uvicorn fastapi dnspython
               containers:
                 - name: net
                   image: python:3.11-alpine3.19
