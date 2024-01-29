@@ -136,17 +136,13 @@ resources:
                     return Response(json.dumps({"status": "failed"}))
             
             
-            def flat_resolve(data=None):
-                return [str(i) for i in data]
-            
-            
             @app.get("/dns/{domain}/{server}/{_type}")
             def dns(domain, server, _type):
                 resolver = dns_resolver.Resolver()
                 resolver.nameservers = [server]
             
                 try:
-                    result = flat_resolve(resolver.resolve(domain, _type))
+                    result = [str(i) for i in resolver.resolve(domain, _type)]
             
                     if result:
                         return Response(json.dumps({"status": "success", "data": result}))
