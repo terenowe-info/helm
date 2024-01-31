@@ -196,7 +196,7 @@ resources:
                         port:
                           number: 8080
                     path: /net(/|$)(.*)
-#                    pathType: Prefix
+                    pathType: ImplementationSpecific
       - apiVersion: networking.k8s.io/v1
         kind: Ingress
         metadata:
