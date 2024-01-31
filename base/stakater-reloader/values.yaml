@@ -3,6 +3,5 @@ fullnameOverride: reloader
 serviceAccount:
     create: true
 
-
 reloader:
   reloadOnCreate: true

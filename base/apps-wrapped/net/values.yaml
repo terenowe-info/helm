@@ -10,6 +10,8 @@ resources:
         kind: Deployment
         metadata:
           name: net
+          annotations:
+            configmap.reloader.stakater.com/reload: "apps-net"
         spec:
           replicas: 1
           selector:
