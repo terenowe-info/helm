@@ -24,4 +24,4 @@ spec:
       helm:
         releaseName: stakater-reloader
         valueFiles:
-          - $argocd-self/base/stakter-reloader/values.yaml
+          - $argocd-self/base/stakater-reloader/values.yaml
