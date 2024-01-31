@@ -20,7 +20,7 @@ spec:
       ref: argocd-self
     - chart: nginx-ingress
       repoURL: https://helm.nginx.com/stable
-      targetRevision: 1.1.0
+      targetRevision: 1.1.2
       helm:
         releaseName: nginx-ingress-external
         valueFiles:
