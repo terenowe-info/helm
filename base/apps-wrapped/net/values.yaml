@@ -119,15 +119,15 @@ resources:
             from dns import resolver as dns_resolver
             import json
             
-            app = FastAPI(docs_url="/", redoc_url=None, swagger_ui_parameters={"defaultModelsExpandDepth": -1}, responses=None)
+            app = FastAPI(docs_url="/", redoc_url=None, swagger_ui_parameters={"defaultModelsExpandDepth": -1})
             
             
-            @app.get("/headers")
+            @app.get("/headers", responses=None)
             def root(request: Request):
                 return request.headers
             
             
-            @app.get("/tcp/{address}/{port}")
+            @app.get("/tcp/{address}/{port}", responses=None)
             def tcp(address, port):
                 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                 sock.settimeout(2)
