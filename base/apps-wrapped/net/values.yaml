@@ -119,7 +119,7 @@ resources:
             from dns import resolver as dns_resolver
             import json
             
-            app = FastAPI(docs_url="/", redoc_url=None)
+            app = FastAPI(docs_url="/", redoc_url=None, swagger_ui_parameters={"defaultModelsExpandDepth": -1})
             
             
             @app.get("/headers")
