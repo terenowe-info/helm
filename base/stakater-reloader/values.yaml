@@ -1,4 +1,4 @@
-fullnameOverride: redpanda
+fullnameOverride: reloader
 
 serviceAccount:
   create: true
