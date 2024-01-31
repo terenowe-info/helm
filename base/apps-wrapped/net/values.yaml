@@ -117,10 +117,10 @@ resources:
             from dns import resolver as dns_resolver
             import json
             
-            app = FastAPI()
+            app = FastAPI(docs_url="/", redoc_url=None)
             
             
-            @app.get("/", include_in_schema=False)
+            @app.get("/headers", include_in_schema=False)
             def root(request: Request):
                 return request.headers
             
