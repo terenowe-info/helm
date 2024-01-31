@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: stakater-reloader
+  namespace: argocd-system
+spec:
+  project: stakater-reloader-system
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: stakater-reloader-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  sources:
+    - repoURL: https://github.com/terenowe-info/helm.git
+      targetRevision: main
+      ref: argocd-self
+    - chart: redpanda
+      repoURL: https://stakater.github.io/stakater-charts
+      targetRevision: 5.6.48
+      helm:
+        releaseName: redpanda
+        valueFiles:
+          - $argocd-self/base/redpanda/values.yaml
