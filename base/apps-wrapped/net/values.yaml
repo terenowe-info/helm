@@ -183,10 +183,10 @@ resources:
           ingressClassName: nginx-external
           tls:
             - hosts:
-                - net.sigma.bajojajo.com
-              secretName: net-sigma-bajojajo-tls
+                - net.bajojajo.com
+              secretName: net-bajojajo-tls
           rules:
-            - host: net.sigma.bajojajo.com
+            - host: net.bajojajo.com
               http:
                 paths:
                   - backend:
