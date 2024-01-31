@@ -72,3 +72,17 @@ projects:
     clusterResourceWhitelist:
       - group: '*'
         kind: '*'
+  - name: stakater-reloader-system
+    namespace: argocd-system
+    finalizers:
+      - resources-finalizer.argocd.argoproj.io
+    sourceRepos:
+      - 'https://github.com/terenowe-info/helm.git'
+      - 'https://stakater.github.io/stakater-charts'
+    destinations:
+      - namespace: stakater-reloader-system
+        name: "in-cluster"
+        server: https://kubernetes.default.svc
+    clusterResourceWhitelist:
+      - group: '*'
+        kind: '*'
