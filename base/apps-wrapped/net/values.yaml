@@ -150,6 +150,8 @@ resources:
                             responses = param.get('responses')
                             if '422' in responses:
                                 del responses['422']
+                            if '200' in responses:
+                                del responses['200']
                 return app.openapi_schema
             
             
