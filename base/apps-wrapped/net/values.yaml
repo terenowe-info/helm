@@ -157,17 +157,22 @@ resources:
             
             app.openapi = custom_openapi
             
-            headers_responses = {}
-            tcp_responses = {}
-            dns_responses = {}
+            default_responses = {
+                "200": {
+                    "description": "Successful Response",
+                    "content": {
+                        "application/json": {}
+                    }
+                }
+            }
             
             
-            @app.get("/headers", responses=headers_responses)
+            @app.get("/headers", responses=default_responses)
             def root(request: Request):
                 return request.headers
             
             
-            @app.get("/tcp/{address}/{port}", responses=tcp_responses)
+            @app.get("/tcp/{address}/{port}", responses=default_responses)
             def tcp(address, port):
                 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                 sock.settimeout(2)
@@ -178,7 +183,7 @@ resources:
                     return Response(json.dumps({"status": "failed"}))
             
             
-            @app.get("/dns/{domain}/{nameserver}/{_type}", responses=dns_responses)
+            @app.get("/dns/{domain}/{nameserver}/{_type}", responses=default_responses)
             def dns(domain, nameserver, _type):
                 resolver = dns_resolver.Resolver()
                 resolver.nameservers = [nameserver]
