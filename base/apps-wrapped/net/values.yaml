@@ -120,7 +120,7 @@ resources:
             app = FastAPI(docs_url="/", redoc_url=None)
             
             
-            @app.get("/headers", include_in_schema=False)
+            @app.get("/headers")
             def root(request: Request):
                 return request.headers
             
