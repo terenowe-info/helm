@@ -120,7 +120,7 @@ resources:
             app = FastAPI()
             
             
-            @app.get("/")
+            @app.get("/", include_in_schema=False)
             def root(request: Request):
                 return request.headers
             
@@ -153,7 +153,7 @@ resources:
                     return Response(json.dumps({"status": "failed", "error": str(e)}))
             
             
-            @app.get("/healthz")
+            @app.get("/healthz", include_in_schema=False)
             def health():
                 return Response(json.dumps({"status": "healthy"}))
       - apiVersion: v1
@@ -175,7 +175,7 @@ resources:
             cert-manager.io/cluster-issuer: cert-manager-letsencrypt-prod
             acme.cert-manager.io/http01-edit-in-place: "true"
             nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
-            nginx.ingress.kubernetes.io/rewrite-target: /
+            nginx.ingress.kubernetes.io/rewrite-target: /docs
             nginx.ingress.kubernetes.io/configuration-snippet: |
               proxy_set_header Forwarded $proxy_add_forwarded;
               proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
