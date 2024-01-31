@@ -145,7 +145,6 @@ resources:
             
                 try:
                     result = [str(i) for i in resolver.resolve(domain, _type)]
-            
                     if result:
                         return Response(json.dumps({"status": "success", "data": result}))
                     else:
