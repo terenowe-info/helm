@@ -127,21 +127,21 @@ resources:
                 return request.headers
             
             
-            @app.get("/tcp/{address_name}/{port}")
-            def tcp(address_name, port):
+            @app.get("/tcp/{address}/{port}")
+            def tcp(address, port):
                 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                 sock.settimeout(2)
             
-                if sock.connect_ex((address_name, int(port))) == 0:
+                if sock.connect_ex((address, int(port))) == 0:
                     return Response(json.dumps({"status": "success"}))
                 else:
                     return Response(json.dumps({"status": "failed"}))
             
             
-            @app.get("/dns/{domain}/{server}/{_type}")
-            def dns(domain, server, _type):
+            @app.get("/dns/{domain}/{nameserver}/{_type}")
+            def dns(domain, nameserver, _type):
                 resolver = dns_resolver.Resolver()
-                resolver.nameservers = [server]
+                resolver.nameservers = [nameserver]
             
                 try:
                     result = [str(i) for i in resolver.resolve(domain, _type)]
