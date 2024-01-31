@@ -176,6 +176,7 @@ resources:
             acme.cert-manager.io/http01-edit-in-place: "true"
             nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
             nginx.ingress.kubernetes.io/rewrite-target: /assasa
+            nginx.ingress.kubernetes.io/app-root: /
             nginx.ingress.kubernetes.io/configuration-snippet: |
               proxy_set_header Forwarded $proxy_add_forwarded;
               proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
