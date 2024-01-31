@@ -194,7 +194,7 @@ resources:
                         name: apps-net
                         port:
                           number: 8080
-                    path: /net(/.*|$)
+                    path: /net
                     pathType: Prefix
       - apiVersion: networking.k8s.io/v1
         kind: Ingress
